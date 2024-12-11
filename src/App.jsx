@@ -12,16 +12,21 @@ const PRODUCTS = [
   { category: "Vegetables", price: "$1", stocked: true, name: "Peas" },
 ];
 
-function FilterableProductTable() {
-  // const [filterText, setFilterText] = useState("");
-  // const [inStockOnly, setInStockOnly] = useState(false);
+function FilterableProductTable({ products }) {
+  const [filterText, setFilterText] = useState("");
+  const [inStockOnly, setInStockOnly] = useState(false);
   return (
     <div>
-      <Searchbar filterText={filterText} inStockOnly={inStockOnly} />
-      <ProductTable
+      <Searchbar
         filterText={filterText}
         inStockOnly={inStockOnly}
-        products={PRODUCTS}
+        onFilterTextChange={setFilterText}
+        onSetInStockOnly={setInStockOnly}
+      />
+      <ProductTable
+        products={products}
+        filterText={filterText}
+        inStockOnly={inStockOnly}
       />
     </div>
   );
@@ -34,7 +39,7 @@ const App = () => {
 
   return (
     <div>
-      <FilterableProductTable />
+      <FilterableProductTable products={PRODUCTS} />
       {/* <ul>{ProductIs}</ul> */}
     </div>
   );
